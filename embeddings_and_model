@@ -1,0 +1,4 @@
+If you would like to reproduce the analysis without needing to calculate the embeddings and fit the BERTopic model from scratch, 
+follow this link to obtain the embeddings and the model files which can be loaded in Colab to the notebook's file repository:
+
+[Project Files (Google Drive)](https://drive.google.com/drive/folders/1a7EJzQwkHDKR_hOZYxpjZsHHqGRnW9q3?usp=sharing)
