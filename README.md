@@ -3,7 +3,7 @@ In this project, BERTopic clustering is performed to find the optimal number of 
 
 _For the full implementation and to reproduce the analysis, please see the Jupyter notebook in this repository. Make sure to install requirements from the requirements.txt file to avoid any version incompatibilities. For simplicity of reproducing the results, the stages of the implementation which take the most time (namely, producing SBERT embeddings for the dataset and finding the optimal model via grid search) can be skipped by downloading the ready embedding and model files also present in this repo and loading them in Colab (cells for loading these inputs are already present in the notebook code). Please make sure you are connected to a GPU runtime if you plan to calculate the embeddings and perform grid search from scratch instead of downloading the files from the repo._ 
 
-**Literature Review**
+# Literature Review
 
 Because the total number of categories is unknown, the task can be interpreted as an unsupervised classification (clustering) problem. Clustering aims to automatically organize a collection of documents into meaningful groups based on content similarity. Existing NLP approaches to clustering vary in computational complexity, performance and interpretability. They can broadly be separated into three categories (Zhu et al., 2025):
 
@@ -30,7 +30,7 @@ As for LLM-based methods, they can be powerful but are more computationally cost
 
 In previous research, unsupervised clustering using BERTopic has yielded high performance (Zhu et al., 2025) while being efficient to implement for large, complex datasets. For instance, in Kaur & Wallace, 2024, 8 out of 12 evaluators preferred clusters from BERTopic over other clustering approaches in terms of informativeness, level of detail and coherence. Therefore, this approach was chosen for the research papers clustering implementation in this project. BERTopic will allow us to automatically discover topic structure in the research papers dataset in an unsupervised manner, while still enabling final evaluation against ground-truth categories present in the arXiv dataset using common clustering evaluation metrics like Adjusted Rand Index (ARI), Normalized Mutual Information (NMI) and Fowlkes–Mallows Index (FMI). (Shilpa et al., 2025)
 
-**Methodology**
+# Methodology
 
 BERTopic leverages SBERT embeddings of text data (in this analysis, produced using the model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) from Hugging Face), coupled with Uniform Manifold Approximation and Projection (UMAP) dimensionality reduction and Hierarchical Density-Based Spatial Clustering of Applications with Noise (HDBSCAN) algorithm to group complex datasets into explainable clusters. 
 <p align="center">
@@ -103,13 +103,13 @@ A deeper qualitative evaluation of the clusters via generating per-cluster word 
   <img src="images/img_7.png" alt="Clusters Word Clouds" width="600"/>
 </p>
 
-**Results Discussion**
+# Results Discussion
 
 As shown in the model results above, BERTopic turned out to be an efficient approach for finding semantic clusters that are not uniform in shape and density. The best-performing model successfully grouped together papers that share common themes, with reasonable degree of alignment between found clusters and primary categories in the arXiv dataset. 
 
 Through extensive hyperparameter tuning using grid search, it was identified that fewer clusters (<10) that are larger in size (750+ data points) with moderate dimensionality reduction helped achieve optimal performance. Further performance improvements could be gained by, for example, using a more powerful model for embedding generation, which is discussed in more detail in the Limitations & Future Work section below. Nevertheless, in this analysis BERTopic has proven to be a robust method for finding salient themes in a complex, multidimensional dataset.
 
-**Limitations & Future Work**
+# Limitations & Future Work
 
 While this analysis was successful and efficient at identifying the optimal number of meaningful topic clusters in the dataset, it also had a few limitations. First, due to computational resource restrictions, the analysis for this demo was performed on 100K data points from the dataset of over 2M research papers. The clusters count and contents will likely change if the analysis is reproduced on the full arXiv dataset.
 
@@ -123,7 +123,7 @@ Regarding further experimentation paths, it could be beneficial to also compare 
 
 Finally, another possible avenue for experimentation could be using BERTopic in supervised or semi-supervised mode, which would allow for the clusters to be guided by the known categories from the arXiv dataset. It could result in more aligned clustering, though this approach would impede BERTopic from surfacing novel themes in the large research papers dataset which were not already encoded in the categories.
 
-**References**
+# References
 
 Divya, G., & Maniraj, V. (2025). _Exploring clustering techniques: Hierarchical vs. K-means in unsupervised learning_. _International Journal of Scientific Research & Engineering Trends, 11_(1), 775–777.
 
