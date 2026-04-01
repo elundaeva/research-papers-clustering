@@ -33,6 +33,8 @@ In previous research, unsupervised clustering using BERTopic has yielded high pe
 **Methodology**
 
 BERTopic leverages SBERT embeddings of text data (in this analysis, produced using the model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) from Hugging Face), coupled with Uniform Manifold Approximation and Projection (UMAP) dimensionality reduction and Hierarchical Density-Based Spatial Clustering of Applications with Noise (HDBSCAN) algorithm to group complex datasets into explainable clusters. 
+![BERTopic - Look Under the Hood](images/img_1.png)
+Source: bertopic.com
 
 What makes BERTopic more transparent than most other clustering approaches is the simplicity of interpreting results, as BERTopic allows to produce visual cluster representations (e.g. word clouds or bar charts) featuring the most frequent terms per cluster identified via the TF-IDF adapted to be calculated on per-cluster instead of per-corpus basis (c-TF-IDF).
 
