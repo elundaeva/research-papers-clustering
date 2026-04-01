@@ -71,22 +71,37 @@ Then, grid search was performed to optimize two key hyperparameters contributing
 Normalized Mutual Information (NMI) score was used as the primary evaluation metric when searching for the optimal hyperparameters because it allows to evaluate how well the found clusters align with known labels and it is less biased than other metrics to imbalanced classes. 
 
 As a result of hyperparameter tuning, the model with min\_cluster\_size=750 and n\_neighbors=50 had the highest NMI (0.504). (See the NMI results for the grid search in the heatmap below)
+<p align="center">
+  <img src="images/img_3.png" alt="Validation NMI Heatmap" width="600"/>
+</p>
 
 The best performing model identified 5 clusters in the dataset, with a reasonable percentage of outliers (13.45%). 
 
 As seen in the figure below, the BERTopic model was prone to producing either too few (<10) or too many (>60) clusters. While neither is ideal, the models with fewer clusters performed better in terms of NMI and tended to have fewer outliers, bringing us to the conclusion that the optimal number of clusters for the 100K slice of this arXiv dataset is <10.
+<p align="center">
+  <img src="images/img_4.png" alt="Validation NMI per Number of Clusters" width="600"/>
+</p>
 
 **4\. Final Evaluation on the Holdout Set**
 
 Cluster quality in the best BERTopic model was further evaluated on an unseen test dataset, with an extended set of evaluation metrics from Shilpa et al., 2025, namely Adjusted Rand Index (ARI), Normalized Mutual Information (NMI), and Fowlkes–Mallows Index (FMI). Additionally, the Silhouette score was calculated to evaluate how similar the data points are to their identified cluster vs others, though this metric is best suited for convex-shaped, similar-sized clusters and is less suitable for high-dimensional data like in this arXiv dataset. (Monshizadeh et al., 2022) 
+<p align="center">
+  <img src="images/img_5.png" alt="Final Evaluation on the Holdout Set" width="600"/>
+</p> 
 
 As seen above, the results of final evaluation were satisfactory, showing reasonably good cohesion within clusters and separation between them, as well as a fair level of alignment with ground truth labels (primary categories). In the Limitations & Future Work ideas are proposed for further improvement of the model, such as using a more powerful SBERT model for embeddings calculation and cleaning the dataset more thoroughly (e.g. by removing words common to all research papers, such as "model", "result", "solution", "study", "theory" and others) to ensure more clear-cut, topic-specific clusters.
 
 **5\. Visualising Clusters for Qualitative Analysis**
 
 As a final step in the analysis, visualisations of clusters were produced to evaluate their sizes, distribution and density. A high-level look at the clusters shows that unlike K-means, BERTopic is able to identify clusters of varying sizes and irregular shapes in the dataset, opening up the potential for finding more subtle, complex themes in the corpus.
+<p align="center">
+  <img src="images/img_6.png" alt="BERTopic Cluster Shapes" width="600"/>
+</p>
 
 A deeper qualitative evaluation of the clusters via generating per-cluster word clouds (see below) revealed that overall, the model clustered papers pertaining to the same high-level subjects together (e.g. math, physics, astronomy). However, it seems the model did not assign separate clusters to sparsely represented categories in the dataset (such as quantitative finance and statistics) and potentially clustered them together as outliers. Further hyperparameter tuning would be needed to ensure greater granularity in the model's clustering approach.
+<p align="center">
+  <img src="images/img_7.png" alt="Clusters Word Clouds" width="600"/>
+</p>
 
 **Results Discussion**
 
