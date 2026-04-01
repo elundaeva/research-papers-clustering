@@ -22,6 +22,7 @@ More sophisticated dense embeddings produced with BERT or similar models are use
 
 These approaches use instruction-tuned GenAI models as a guide for text clustering by generating labels directly from the data, which can subsequently be used for training a classifier.
 
+
 Since we don't have a pre-defined number of categories in this task, the traditional, simpler methods like K-means clustering may not be useful. Though the optimal k can be found via the elbow method by plotting WCSS against different k values, K-means has other weaknesses as well, such as struggling with non-linear clusters, including clusters with varying densities or irregular shapes (Divya & Maniraj, 2025), which also makes it less suitable for this task with a complex, multidimensional dataset.
 
 Graph-based methods such as Leiden algorithms and spectral clustering can be very performant in modeling complex text data like the arXiv database of research papers since they have superior ability to effectively model citation networks. Despite their efficiency, to achieve good performance extensive parameter tuning would be needed, and they can struggle handling large networks with uneven structures, such as research papers dataset containing loosely connected papers. (Huong & Koch, 2025)
