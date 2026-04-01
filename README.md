@@ -48,6 +48,9 @@ The BERTopic implementation for this project included five key stages:
 When loading the dataset, the first 100K data points were preserved only, to ensure fast execution of this demo. Only the abstract and categories were saved to a pandas df, to keep the dataframe focused on the main elements needed for the analysis. Additionally, the primary category associated with each article was extracted, which was the first category mentioned, without any subcategorization included (e.g. "math.CO cs.CG" became "math"). This helped reduce dataset dimensionality and ensure a cleaner ground truth to evaluate the model against later, as there were 6,072 categories present before this extraction and only 18 after in the 100,000 papers dataset.
 
 The category distribution was found to be highly uneven (see figure "Paper Distribution by Primary Category" below), where the most common categories like math and astrophysics had tens of thousands papers, while the least common categories such as quantitative finance and statistics only had a few hundred papers present in the dataset. This finding supports the choice of BERTopic as a clustering approach over, for example, K-means which tends to struggle with imbalanced clusters and irregular distributions.
+<p align="center">
+  <img src="images/img_2.png" alt="Papers Distribution by Primary Category" width="600"/>
+</p>
 
 During dataset exploration, it was also found that the average abstract length was 121 words and the maximum was 457 words, showing the abstracts were suitable for generating SBERT embeddings without token limit issues. So, it was established that no abstract trimming would be necessary. At the same time, the shortest abstract length of 2 words pointed to the need for removing papers from the analysis that had uninformatively short abstracts, which was done in the following step - preprocessing.
 
